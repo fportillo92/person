@@ -3,7 +3,7 @@ package com.person;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.person"})
 public class PersonApplication {
 
 	public static void main(String[] args) {
