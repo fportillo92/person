@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/persons")
 public class PersonController {
 
     private static final Logger logger = LogManager.getLogger(PersonController.class);
@@ -25,12 +25,12 @@ public class PersonController {
     @Autowired
     PersonServiceImpl personService;
 
-    @GetMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Person>> findAll() {
         return new ResponseEntity<>(personService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createPerson(@Valid @RequestBody final Person person) {
         try {
             return new ResponseEntity<>((personService.createPerson(person)), HttpStatus.CREATED);
@@ -40,7 +40,7 @@ public class PersonController {
         }
     }
 
-    @PutMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updatePerson(@Valid @RequestBody final Person person) {
         try {
             return new ResponseEntity<>(personService.updatePerson(person.getPersonIdentity(), person), HttpStatus.OK);
@@ -50,7 +50,7 @@ public class PersonController {
         }
     }
 
-    @GetMapping(value = "/persons/personIdentity", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/personIdentity", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity readPerson(@RequestParam(value = "docType") String docType,
                                      @RequestParam(value = "docNumber") String docNumber,
                                      @RequestParam(value = "country") String country,
@@ -64,5 +64,15 @@ public class PersonController {
         }
     }
 
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deletePerson(@Valid @RequestBody final Person person) {
+        try {
+            personService.deletePerson(person.getPersonIdentity());
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        } catch (PersonException e) {
+            logger.error("Error deleting person" + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
 }
