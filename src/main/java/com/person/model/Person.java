@@ -1,8 +1,6 @@
 package com.person.model;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -11,6 +9,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "person")
 public class Person {
+
+    @OneToOne(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.REMOVE},optional=false)
+    @JoinColumn(name = "id_person", referencedColumnName = "id")
+    private GeneralSequenceNumber idPerson;
 
     @EmbeddedId
     private PersonIdentity personIdentity;
@@ -28,17 +30,21 @@ public class Person {
     @Size(max = 20)
     private String phone;
 
+    @ManyToOne
+    private Person person;
+
     public Person() { }
 
     public Person(PersonIdentity personIdentity) { }
 
-    public Person(PersonIdentity personIdentity, String name, String surname, int age, @Email @Size(max = 60) String email, @Size(max = 20) String phone) {
+    public Person(PersonIdentity personIdentity, GeneralSequenceNumber idPerson, String name, String surname, int age, @Email @Size(max = 60) String email, @Size(max = 20) String phone) {
         this.personIdentity = personIdentity;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
         this.phone = phone;
+        this.idPerson = idPerson;
     }
 
     public String getEmail() {
@@ -87,5 +93,22 @@ public class Person {
 
     public void setPersonIdentity(PersonIdentity personIdentity) {
         this.personIdentity = personIdentity;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+
+    public GeneralSequenceNumber getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(GeneralSequenceNumber idPerson) {
+        this.idPerson = idPerson;
     }
 }

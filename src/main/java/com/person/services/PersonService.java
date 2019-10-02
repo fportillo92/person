@@ -18,4 +18,6 @@ public interface PersonService {
 
     void deletePerson(PersonIdentity personIdentity) throws PersonException;
 
+    Person addParent(Long idPerson);
+
 }

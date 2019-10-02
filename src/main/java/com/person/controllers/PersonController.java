@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -73,6 +74,11 @@ public class PersonController {
             logger.error("Error deleting person" + e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+    }
+
+    @PostMapping(value = "/{id1}/padre/{id2}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addParent(@PathVariable long id1, @PathVariable long id2) {
+        return new ResponseEntity<>(personService.addParent(id1), HttpStatus.OK);
     }
 
 }

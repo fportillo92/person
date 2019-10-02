@@ -46,4 +46,9 @@ public class PersonServiceImpl implements PersonService{
     public void deletePerson(PersonIdentity personIdentity) throws PersonException {
         personRepository.deleteById(personIdentity);
     }
+
+    @Override
+    public Person addParent(Long idPerson) {
+        return personRepository.findByIdPerson(idPerson);
+    }
 }
