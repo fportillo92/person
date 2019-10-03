@@ -4,6 +4,7 @@ import com.person.exceptions.PersonException;
 import com.person.model.Person;
 import com.person.model.PersonIdentity;
 import com.person.repository.PersonRepository;
+import com.person.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,80 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public Person addParent(Long idPerson) {
-        return personRepository.findByIdPerson(idPerson);
+    public void addParent(Long idPersonParent, Long idPerson) {
+        Person parent = personRepository.findByIdPerson(idPersonParent);
+        Person son = personRepository.findByIdPerson(idPerson);
+
+        if (parent != null && son != null) {
+            son.setPerson(parent);
+            personRepository.save(son);
+        }
+
     }
+
+    @Override
+    public String getRelationship(Long idPerson1, long idPerson2) {
+        Person person1 = personRepository.findByIdPerson(idPerson1);
+        Person person2 = personRepository.findByIdPerson(idPerson2);
+
+        if (person1 != null && person2 != null) {
+            if (isBrotherOrSister(person1, person2)) {
+                return "Herman@";
+            }
+            if (isCousin(person1, person2)) {
+                return "Prim@";
+            }
+            if (isUncleOrAunt(person1, person2)) {
+                return "Ti@";
+            }
+        }
+
+        return "No existe relacion";
+    }
+
+    /*
+        Si los padres son la misma persona, entonces son herman@s
+     */
+    private boolean isBrotherOrSister(Person person1, Person person2) {
+        Person parent1 = person1.getPerson();
+        Person parent2 = person2.getPerson();
+
+        if (Utils.comparePersons(parent1, parent2)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /*
+        Si el/la abuel@ de una persona es la misma que el padre/madre de la otra entonces es el/la ti@
+     */
+    private boolean isUncleOrAunt(Person person1, Person person2) {
+        Person parent1 = person1.getPerson();
+        Person parent2 = person2.getPerson();
+        Person grandParent = parent2.getPerson();
+
+        if (Utils.comparePersons(grandParent, parent1)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+        Si los padres de las dos personas son herman@s
+     */
+    private boolean isCousin(Person person1, Person person2) {
+        Person parent1 = person1.getPerson();
+        Person parent2 = person2.getPerson();
+
+        if (isBrotherOrSister(parent1, parent2)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

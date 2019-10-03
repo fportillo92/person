@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -78,7 +77,11 @@ public class PersonController {
 
     @PostMapping(value = "/{id1}/padre/{id2}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addParent(@PathVariable long id1, @PathVariable long id2) {
-        return new ResponseEntity<>(personService.addParent(id1), HttpStatus.OK);
+        if (id1 != id2) {
+            personService.addParent(id1, id2);
+            return new ResponseEntity<>("Added Parent", HttpStatus.OK);
+        } else return new ResponseEntity<>("Error: Same id", HttpStatus.BAD_REQUEST);
+
     }
 
 }

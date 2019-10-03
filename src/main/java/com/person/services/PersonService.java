@@ -18,6 +18,8 @@ public interface PersonService {
 
     void deletePerson(PersonIdentity personIdentity) throws PersonException;
 
-    Person addParent(Long idPerson);
+    void addParent(Long idPersonParent, Long idPerson);
+
+    String getRelationship(Long idPerson1, long idPerson2);
 
 }

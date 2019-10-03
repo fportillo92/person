@@ -5,14 +5,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "person")
 public class Person {
 
-    @OneToOne(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.REMOVE},optional=false)
-    @JoinColumn(name = "id_person", referencedColumnName = "id")
-    private GeneralSequenceNumber idPerson;
+    private long idPerson;
 
     @EmbeddedId
     private PersonIdentity personIdentity;
@@ -35,9 +34,11 @@ public class Person {
 
     public Person() { }
 
-    public Person(PersonIdentity personIdentity) { }
+    public Person(PersonIdentity personIdentity) {
+        this.personIdentity = personIdentity;
+    }
 
-    public Person(PersonIdentity personIdentity, GeneralSequenceNumber idPerson, String name, String surname, int age, @Email @Size(max = 60) String email, @Size(max = 20) String phone) {
+    public Person(PersonIdentity personIdentity, long idPerson, String name, String surname, int age, @Email @Size(max = 60) String email, @Size(max = 20) String phone) {
         this.personIdentity = personIdentity;
         this.name = name;
         this.surname = surname;
@@ -103,12 +104,26 @@ public class Person {
         this.person = person;
     }
 
-
-    public GeneralSequenceNumber getIdPerson() {
+    public long getIdPerson() {
         return idPerson;
     }
 
-    public void setIdPerson(GeneralSequenceNumber idPerson) {
+    public void setIdPerson(long idPerson) {
         this.idPerson = idPerson;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return idPerson == person.idPerson &&
+                Objects.equals(personIdentity, person.personIdentity);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(idPerson, personIdentity);
     }
 }
