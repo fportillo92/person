@@ -3,6 +3,7 @@ package com.person.controllers;
 import com.person.model.StadisticReport;
 import com.person.services.PersonService;
 import com.person.services.StadisticService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@Api(value="Stadistic Reports", description="Operations to get information about Persons")
 @RestController
 @RequestMapping("/api/estadisticas")
 public class StadisticController {

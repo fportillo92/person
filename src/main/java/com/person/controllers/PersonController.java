@@ -5,6 +5,7 @@ import com.person.model.Gender;
 import com.person.model.Person;
 import com.person.model.PersonIdentity;
 import com.person.services.PersonServiceImpl;
+import io.swagger.annotations.Api;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Api(value="Person CRUD", description="Operations on Person resource")
 @RestController
 @RequestMapping("/api/persons")
 public class PersonController {

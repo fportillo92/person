@@ -1,6 +1,7 @@
 package com.person.controllers;
 
 import com.person.services.PersonService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@Api(value="Relationships", description="Operations for family relationships")
 @RequestMapping("/api/relaciones")
 @RestController
 public class RelationshipController {

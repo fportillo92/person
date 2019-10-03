@@ -1,5 +1,7 @@
 package com.person.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -20,6 +22,7 @@ public class Person {
     private String name;
     private String surname;
 
+    @ApiModelProperty(notes = "only valid 18 to 130")
     @Min(18) @Max(130)
     private int age;
 
