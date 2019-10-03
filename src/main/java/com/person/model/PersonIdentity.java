@@ -80,4 +80,5 @@ public class PersonIdentity implements Serializable {
 
         return Objects.hash(docType, docNumber, country, gender);
     }
+
 }

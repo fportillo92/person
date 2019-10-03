@@ -11,10 +11,11 @@ import java.util.Objects;
 @Table(name = "person")
 public class Person {
 
-    private long idPerson;
-
     @EmbeddedId
     private PersonIdentity personIdentity;
+
+    @Column(name = "id", insertable = false, updatable = false)
+    private Long id;
 
     private String name;
     private String surname;
@@ -38,14 +39,14 @@ public class Person {
         this.personIdentity = personIdentity;
     }
 
-    public Person(PersonIdentity personIdentity, long idPerson, String name, String surname, int age, @Email @Size(max = 60) String email, @Size(max = 20) String phone) {
+    public Person(PersonIdentity personIdentity, long id, String name, String surname, int age, @Email @Size(max = 60) String email, @Size(max = 20) String phone) {
         this.personIdentity = personIdentity;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
         this.phone = phone;
-        this.idPerson = idPerson;
+        this.id = id;
     }
 
     public String getEmail() {
@@ -104,12 +105,12 @@ public class Person {
         this.person = person;
     }
 
-    public long getIdPerson() {
-        return idPerson;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPerson(long idPerson) {
-        this.idPerson = idPerson;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -117,13 +118,12 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return idPerson == person.idPerson &&
-                Objects.equals(personIdentity, person.personIdentity);
+        return Objects.equals(personIdentity, person.personIdentity);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idPerson, personIdentity);
+        return Objects.hash(personIdentity);
     }
 }
