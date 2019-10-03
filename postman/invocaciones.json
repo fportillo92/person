@@ -1,0 +1,259 @@
+{
+  "info": {
+    "_postman_id": "46e2338e-d6d3-4d5a-a748-58196fd96b38",
+    "name": "supervielle",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "create person",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "    {\r\n        \"personIdentity\": {\r\n            \"docType\": \"LE\",\r\n            \"docNumber\": \"38839640\",\r\n            \"country\": \"ARGENTINA\",\r\n            \"gender\": \"F\"\r\n        },\r\n        \"name\": \"Federico\",\r\n        \"surname\": \"Portillo\",\r\n        \"age\": 21,\r\n        \"email\": \"e@e.com\",\r\n        \"phone\": \"1140289224\"\r\n    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/persons",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "persons"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all persons",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/persons",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "persons"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update person",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"personIdentity\": {\r\n        \"docType\": \"DNI\",\r\n        \"docNumber\": \"33444555\",\r\n        \"country\": \"ARGENTINA\",\r\n        \"gender\": \"F\"\r\n    },\r\n    \"name\": \"Paula Noemi\",\r\n    \"surname\": \"Rodriguez\",\r\n    \"age\": 32,\r\n    \"email\": \"email@email.com\",\r\n    \"phone\": \"111111111\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/persons",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "persons"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "read person",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/persons/personIdentity?docType=DNI&docNumber=33444555&country=ARGENTINA&gender=F",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "persons",
+            "personIdentity"
+          ],
+          "query": [
+            {
+              "key": "docType",
+              "value": "DNI"
+            },
+            {
+              "key": "docNumber",
+              "value": "33444555"
+            },
+            {
+              "key": "country",
+              "value": "ARGENTINA"
+            },
+            {
+              "key": "gender",
+              "value": "F"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete person",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"personIdentity\": {\r\n        \"docType\": \"DNI\",\r\n        \"docNumber\": \"33444555\",\r\n        \"country\": \"ARGENTINA\",\r\n        \"gender\": \"F\"\r\n    },\r\n    \"name\": \"Paula\",\r\n    \"surname\": \"Rodriguez\",\r\n    \"age\": 32,\r\n    \"email\": \"email@email.com\",\r\n    \"phone\": \"111111111\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://sup-person-project.herokuapp.com/api/persons",
+          "protocol": "https",
+          "host": [
+            "sup-person-project",
+            "herokuapp",
+            "com"
+          ],
+          "path": [
+            "api",
+            "persons"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "stadistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/estadisticas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "estadisticas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "relacion padre",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/persons/2/padre/3",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "persons",
+            "2",
+            "padre",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "view relationship",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"docType\": \"DNI\",\r\n    \"docNumber\": \"366994587\",\r\n    \"country\": \"ARGENTINA\",\r\n    \"gender\": \"M\",\r\n    \"name\": \"Federico\",\r\n    \"surname\": \"Portillo\",\r\n    \"age\": 21,\r\n    \"email\": \"e@e.com\",\r\n    \"phone\": \"1140289224\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/api/relaciones/3/2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "relaciones",
+            "3",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
