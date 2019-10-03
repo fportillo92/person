@@ -1,6 +1,6 @@
 # API REST Service for CRUD Persons Using Spring-Boot
 
-<a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." /></a>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f3de1a5af494f929b758ea00db9d885)](https://www.codacy.com/manual/fportillo92/person?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fportillo92/person&amp;utm_campaign=Badge_Grade)
 
 + API REST que te permite realizar operaciones sobre personas, creada en Spring-boot usando JPA.
 
